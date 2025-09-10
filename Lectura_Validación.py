@@ -1,10 +1,49 @@
 import pandas as pd
 
 # ---Ejercicio 1---
-# Esto se dee cambiar dependiendo de la ubicación del archivo
-ruta_1 = r"C:\Users\UTEM\Desktop\Datasayens\pokemon_primera_gen.csv"
+df_pokemon = pd.read_csv("pokemon_primera_gen.csv")
 
-df_pokemon = pd.read_csv(ruta_1)
+# Usamos un csv de Internet para comparar los datos de los Pokemon y verificar que estén correctos
+df_pokemon_verificacion = pd.read_csv("FirstGenPokemon.csv")
+df_pokemon_verificacion = df_pokemon_verificacion[[" Name", " Type1", " Type2", " HP", " Attack", " Defense", " Speed"]]
+df_pokemon_verificacion = df_pokemon_verificacion.rename(columns={" Name": "Nombre", " Type1": "Tipo 1", " Type2": "Tipo 2",
+" Speed": "Velocidad", " Attack": "Ataque", " Defense": "Defensa", " HP": "PS"})
+df_pokemon_verificacion = df_pokemon_verificacion[["Nombre", "Tipo 1", "Tipo 2", "Ataque", "Defensa", "Velocidad", "PS"]]
+
+#Traducimos los tipos
+traduccion_tipos = {
+    "grass": "Planta",
+    "fire": "Fuego",
+    "water": "Agua",
+    "electric": "Eléctrico",
+    "psychic": "Psiquico",
+    "ice": "Hielo",
+    "dragon": "Dragón",
+    "dark": "Siniestro",
+    "fairy": "Hada",
+    "normal": "Normal",
+    "fighting": "Lucha",
+    "flying": "Volador",
+    "poison": "Veneno",
+    "ground": "Tierra",
+    "rock": "Roca",
+    "bug": "Bicho",
+    "ghost": "Fantasma",
+    "steel": "Acero"
+}
+df_pokemon_verificacion["Tipo 1"] = df_pokemon_verificacion["Tipo 1"].replace(traduccion_tipos)
+df_pokemon_verificacion["Tipo 2"] = df_pokemon_verificacion["Tipo 2"].replace(traduccion_tipos)
+
+# Aquí podemos comparar ambos DF y ver las diferencias entre ambos csv
+# Usamos el if para que solo se ejecute si compilamos este archivo
+if __name__ == "__main__":
+    diferencias = df_pokemon.compare(df_pokemon_verificacion)
+    print(diferencias)
+
+# Aquí excluimos la variable "Nombre", ya que están mejor en el csv original y actualizamos el csv original
+columnas_actualizar = ["Tipo 1", "Tipo 2", "Ataque", "Defensa", "Velocidad", "PS"]
+df_pokemon[columnas_actualizar] = df_pokemon_verificacion[columnas_actualizar]
+
 
 """
 Ejercicios de Análisis de Datos con Pokémon (Primera Generación)

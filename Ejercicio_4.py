@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 - Grafica la distribución de la defensa usando un diagrama de violín.
 '''
 
-# Histograma de ataque
+# Histograma de Ataque
 sns.histplot(df_pokemon["Ataque"])
 plt.title("Histograma de ataque")
 plt.xlabel("Ataque")

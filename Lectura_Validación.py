@@ -99,7 +99,3 @@ Recuerda usar las funciones de Pandas como mean(), median(), mode(), std(),
 describe(), groupby(), así como las funciones de visualización de Matplotlib y
 Seaborn vistas en la Semana 3.
 """
-
-# En gráfico, eje x = tipo, eje y = defensa
-# Gráfico violin con Seaborn
-# https://www.kaggle.com/datasets/dizzypanda/gen-1-pokemon?resource=download
